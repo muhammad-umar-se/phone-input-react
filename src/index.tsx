@@ -4,7 +4,6 @@ import { countryDetails } from "./constants/CountryDetails";
 import { formatIncompletePhoneNumber } from "libphonenumber-js";
 import { Country, Input } from "./types/interfaces";
 import IconArrowDown from "./assets/IconArrowDown";
-import "./style/_phoneInput.scss";
 export const PhoneInput = (input: Input) => {
   const { phoneNumber, setPhoneNumber } = input;
   const [displayList, setDisplayList] = useState(false);
