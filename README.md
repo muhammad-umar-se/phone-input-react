@@ -12,9 +12,8 @@ Highly customizable phone input component with auto formatting.
 ## Installation
 
 ```shell-script
-npm install npm i phone-input-react --save
+npm i phone-input-react --save
 ```
-
 
 ## Contributing
 
