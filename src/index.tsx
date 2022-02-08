@@ -1,50 +1,44 @@
-import { useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { flagUrl, phoneNoReg, removeSpace } from "../src/constants";
+import { countryDetails } from "../src/CountryDetails";
 import { formatIncompletePhoneNumber } from "libphonenumber-js";
+import { Country, Input } from "../src/types/interfaces";
+import IconArrowDown from "./assets/IconArrowDown";
 
-import { Country, Input } from "./types/interfaces";
-import { flagURL, phoneNoReg } from "./constants";
-import { countryDetails } from "./CountryDetails";
-import React from "react";
-
-export const PhoneInput = (input: Input): JSX.Element => {
+export const PhoneInput = (input: Input) => {
   const { phoneNumber, setPhoneNumber } = input;
   const [displayList, setDisplayList] = useState(false);
   const [flag, setFlag] = useState("");
   const [isFlagSelected, setIsFlagSelected] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 
   useEffect(() => {
-    const length = phoneNumber.length;
-
-    if (!length) setFlag(flagURL + `us.webp`);
-  }, [phoneNumber]);
-
-  useEffect(() => {
-    const callingCode = "+" + phoneNumber.replace(/\s/g, "");
-
-    const phoneNumberParsed = formatIncompletePhoneNumber(callingCode);
-    const getCountryCode = phoneNumberParsed.split(" ");
+    if (!phoneNumber.length) setFlag(flagUrl("us"));
+    const callingCode = `+${String(phoneNumber).replace(removeSpace, "")}`;
+    const getCountryCode = formatIncompletePhoneNumber(callingCode).split(" ");
     const findFlag = countryDetails.find(
-      (item: Country) =>
+      (item) =>
         item?.countryCallingCode ===
         (isFlagSelected ? callingCode : getCountryCode[0])
     );
     if (findFlag) {
-      setFlag(flagURL + `${findFlag?.countryCode}.webp`);
+      setFlag(flagUrl(findFlag?.countryCode));
       setDisplayList(false);
     }
-    //setIsFlagSelected(false);
   }, [phoneNumber, isFlagSelected]);
-  const specifiedElement = document.getElementById("Flags");
 
+  const specifiedElement = document.getElementById("Flags");
   document.addEventListener("click", function (event) {
     const isClickInside = specifiedElement?.contains(event.target as Node);
-
     if (!isClickInside) {
       setDisplayList(false);
-    } else setDisplayList(true);
+    } else {
+      setDisplayList(true);
+    }
   });
-  const handleInputOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.replace(/\s/g, "");
+
+  const handleInputOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value.replace(removeSpace, "");
     if (value === "" || phoneNoReg.test(value)) {
       setPhoneNumber(value);
     }
@@ -53,27 +47,30 @@ export const PhoneInput = (input: Input): JSX.Element => {
   const handleInputOnPaste = (
     event: React.ClipboardEvent<HTMLInputElement>
   ) => {
-    const number = event.clipboardData.getData("Text");
-    let callingCode = "+" + number.slice(0, 4);
-    var trimCallingCode = "";
+    const callingCode = `+${event.clipboardData.getData("Text").slice(0, 4)}`;
+    let trimCallingCode = "";
     for (const item of callingCode) {
       trimCallingCode = trimCallingCode + item;
       const country = countryDetails.find(
-        // eslint-disable-next-line no-loop-func
         (item: Country) => item?.countryCallingCode === trimCallingCode
       );
       if (country) {
-        setFlag(flagURL + `${country?.countryCode}.webp`);
+        setFlag(flagUrl(country?.countryCode));
       }
     }
   };
+
   return (
-    <div>
-      <div className="phone-number-field">
+    <div className="w-100">
+      <div
+        className={`phone-number-field ${
+          isActive ? "phone-number-field__active" : ""
+        }`}
+      >
         <img
-          alt={"flag"}
+          alt={"NF"}
           src={flag}
-          className="phone-number-field__menu__item__img"
+          className="phone-number-field__menu__item__img rounded"
         />
         <button
           className="phone-number-field__button"
@@ -83,22 +80,31 @@ export const PhoneInput = (input: Input): JSX.Element => {
             setDisplayList(!displayList);
           }}
         >
-          {/* <IconBack /> */}
+          <IconArrowDown />
         </button>
         <span
-          className={`subtitle-3 ml-2 ${
+          className={`subtitle-3 ml-1 ${
             phoneNumber ? "font-color-black" : "grey-color-text"
           }`}
         >
           +
         </span>
         <input
+          onFocus={() => setIsActive(true)}
+          onBlur={() => setIsActive(false)}
           maxLength={15}
           placeholder="123 456 7891"
           className="phone-number-field__input"
-          value={phoneNumber ? phoneNumber : ""}
+          value={
+            phoneNumber
+              ? formatIncompletePhoneNumber("+" + String(phoneNumber)).replace(
+                  "+",
+                  ""
+                )
+              : ""
+          }
           onChange={(e) => {
-            setIsFlagSelected(false);
+            phoneNumber.length < 4 && setIsFlagSelected(false);
             handleInputOnChange(e);
           }}
           onPaste={(event) => {
@@ -112,26 +118,26 @@ export const PhoneInput = (input: Input): JSX.Element => {
           displayList ? "d-block" : "d-none"
         }`}
       >
-        {countryDetails.map((item) => {
+        {countryDetails.map((item: Country) => {
           return (
             <div
+              key={item?.countryCode + item?.countryName}
               onClick={() => {
                 setPhoneNumber(parseInt(item?.countryCallingCode));
                 setIsFlagSelected(true);
               }}
-              //TODO: Save calling code or name to display selected on the screen.
               className={"phone-number-field__menu__item"}
             >
               <img
                 alt={"flag"}
-                src={flagURL + `${item?.countryCode}.webp`}
-                className="phone-number-field__menu__item__img ml-3"
+                src={flagUrl(item?.countryCode)}
+                className="phone-number-field__menu__item__img rounded"
               />
-              <span className="phone-number-field__menu__item__country-name">
+              <span className="phone-number-field__menu__item__country-name text-truncate">
                 {item?.countryName}
               </span>
               <span className="phone-number-field__menu__item__country-code ml-2">
-                {item?.countryCallingCode}
+                ({item?.countryCallingCode})
               </span>
             </div>
           );
