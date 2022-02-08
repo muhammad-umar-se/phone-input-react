@@ -1,8 +1,8 @@
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { flagUrl, phoneNoReg, removeSpace } from "../src/constants";
-import { countryDetails } from "../src/CountryDetails";
+import { flagUrl, phoneNoReg, removeSpace } from "./constants/constants";
+import { countryDetails } from "./constants/CountryDetails";
 import { formatIncompletePhoneNumber } from "libphonenumber-js";
-import { Country, Input } from "../src/types/interfaces";
+import { Country, Input } from "./types/interfaces";
 import IconArrowDown from "./assets/IconArrowDown";
 
 export const PhoneInput = (input: Input) => {

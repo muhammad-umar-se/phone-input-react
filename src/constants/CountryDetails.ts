@@ -1,4 +1,4 @@
-import { Country } from "./types/interfaces";
+import { Country } from "../types/interfaces";
 export const countryDetails: Country[] = [
   {
     countryName: "Afghanistan",

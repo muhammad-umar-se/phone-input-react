@@ -1,3 +1,3 @@
 /// <reference types="react" />
-import { Input } from "../src/types/interfaces";
+import { Input } from "./types/interfaces";
 export declare const PhoneInput: (input: Input) => JSX.Element;
