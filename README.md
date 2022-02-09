@@ -9,6 +9,8 @@ Highly customizable phone input component with auto formatting.
 
 <!-- ![animation](https://media.giphy.com/media/xiORAWnqoTJDsH0UOI/giphy.gif) -->
 
+![animation](https://imgur.com/phjYfx7)
+
 ## Installation
 
 ```shell-script
@@ -16,6 +18,7 @@ npm i phone-input-react --save
 ```
 
 ## Usage
+
 ```jsx
 import PhoneInput from 'phone-input-react'
 <PhoneInput
