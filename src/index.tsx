@@ -4,10 +4,12 @@ import { countryDetails } from "./constants/CountryDetails";
 import { formatIncompletePhoneNumber } from "libphonenumber-js";
 import { Country, Input } from "./types/interfaces";
 import IconArrowDown from "./assets/IconArrowDown";
+import {style} from './assets/style'
+
 export const PhoneInput = (input: Input) => {
-  const { phoneNumber, setPhoneNumber } = input;
-  const [displayList, setDisplayList] = useState(false);
-  const [flag, setFlag] = useState("");
+  const { phoneNumber, setPhoneNumber,defaultFlag='',startingSymbol='+',className='' } = input;
+  const [flag, setFlag] = useState(defaultFlag);
+  const [displayList, setDisplayList] = useState(false);  
   const [isFlagSelected, setIsFlagSelected] = useState(false);
   const [isActive, setIsActive] = useState(false);
 
@@ -60,19 +62,19 @@ export const PhoneInput = (input: Input) => {
   };
 
   return (
-    <div className="w-100">
+    <div className={style["phone-number-field__main-container"] + className}>
       <div
-        className={`phone-number-field ${
-          isActive ? "phone-number-field__active" : ""
+        className={`${style['phone-number-field']} ${
+          isActive ? style["phone-number-field__active"] : ""
         }`}
       >
         <img
           alt={"NF"}
           src={flag}
-          className="phone-number-field__menu__item__img rounded"
+          className={style["phone-number-field__menu__item__img"]}
         />
         <button
-          className="phone-number-field__button"
+          className={style["phone-number-field__button"]}
           type="button"
           id="Flags"
           onClick={() => {
@@ -82,22 +84,22 @@ export const PhoneInput = (input: Input) => {
           <IconArrowDown />
         </button>
         <span
-          className={`subtitle-3 ml-1 ${
-            phoneNumber ? "font-color-black" : "grey-color-text"
+          className={`${
+            phoneNumber ? style["font-color-black"] : style["grey-color-text"]
           }`}
         >
-          +
+          {startingSymbol}
         </span>
         <input
           onFocus={() => setIsActive(true)}
           onBlur={() => setIsActive(false)}
           maxLength={15}
           placeholder="123 456 7891"
-          className="phone-number-field__input"
+          className={style["phone-number-field__input"]}
           value={
             phoneNumber
-              ? formatIncompletePhoneNumber("+" + String(phoneNumber)).replace(
-                  "+",
+              ? formatIncompletePhoneNumber(startingSymbol + String(phoneNumber)).replace(
+                  startingSymbol,
                   ""
                 )
               : ""
@@ -113,9 +115,8 @@ export const PhoneInput = (input: Input) => {
         />
       </div>
       <div
-        className={`phone-number-field__menu ${
-          displayList ? "d-block" : "d-none"
-        }`}
+        className={`${style['phone-number-field__menu']} 
+        ${displayList ? style["d-block"] : style["d-none"]}`}
       >
         {countryDetails.map((item: Country) => {
           return (
@@ -125,17 +126,17 @@ export const PhoneInput = (input: Input) => {
                 setPhoneNumber(parseInt(item?.countryCallingCode));
                 setIsFlagSelected(true);
               }}
-              className={"phone-number-field__menu__item"}
+              className={style["phone-number-field__menu__item"]}
             >
               <img
                 alt={"flag"}
                 src={flagUrl(item?.countryCode)}
-                className="phone-number-field__menu__item__img rounded"
+                className={style["phone-number-field__menu__item__img"]}
               />
-              <span className="phone-number-field__menu__item__country-name text-truncate">
+              <span className={style["phone-number-field__menu__item__country-name"]}>
                 {item?.countryName}
               </span>
-              <span className="phone-number-field__menu__item__country-code ml-2">
+              <span className={style["phone-number-field__menu__item__country-code"]}>
                 ({item?.countryCallingCode})
               </span>
             </div>
