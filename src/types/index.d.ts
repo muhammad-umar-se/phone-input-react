@@ -1,6 +1,6 @@
 export interface PhoneInputProps {
   phoneNumber: string;
-  setPhoneNumber: (v: string) => void;
+  setPhoneNumber: (v: string|number) => void;
   defaultFlag?: string;
   startingSymbol?: string;
   className?: string;

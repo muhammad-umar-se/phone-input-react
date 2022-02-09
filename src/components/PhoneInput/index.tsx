@@ -102,19 +102,16 @@ const PhoneInput: FC<PhoneInputProps> = (input: PhoneInputProps) => {
       </div>
       <div className={`phone-number-field__menu ${displayList ? 'd-block' : 'd-none'}`}>
         {countryDetails.map((item: Country) => (
-          // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <div
             key={item?.countryCode + item?.countryName}
             onClick={() => {
-              setPhoneNumber(item?.countryCallingCode);
+              setPhoneNumber(Number(item?.countryCallingCode));
               setIsFlagSelected(true);
             }}
             className="phone-number-field__menu__item"
           >
             <img alt="flag" src={flagUrl(item?.countryCode)} className="phone-number-field__menu__item__img" />
-
             <span className="phone-number-field__menu__item__country-name">{item?.countryName}</span>
-
             <span className="phone-number-field__menu__item__country-code">({item?.countryCallingCode})</span>
           </div>
         ))}
