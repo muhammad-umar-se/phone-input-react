@@ -1,0 +1,113 @@
+.phone-number-field {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #cacaca;
+    border-radius: 5px;
+    height: 55px;
+    width: 17.50rem;
+    outline: none;
+    padding: 0 0.5rem;
+    transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.phone-number-field__main-container {
+    width: 18.75rem;
+}
+
+.phone-number-field__active {
+    border: 1px solid #1f1f1f;
+    box-shadow: rgba(149, 157, 165, 0.2) 0 8px 24px;
+}
+
+.phone-number-field__input {
+    width: 100%;
+    height: fit-content;
+    min-height: 2.75rem;
+    border: none;
+}
+
+.phone-number-field__input::placeholder {
+    color: gray;
+}
+
+.phone-number-field__input:focus-visible {
+    outline: none;
+}
+
+.phone-number-field__button {
+    outline: none;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 0.25rem;
+    border: none;
+    appearance: none;
+}
+
+.phone-number-field__button svg {
+    height: 10px;
+    width: 10px;
+    fill: #1f1f1f;
+}
+
+.phone-number-field__menu {
+    z-index: 1;
+    position: absolute;
+    padding: 0.625rem 0;
+    box-shadow: 1px 2px 18px lightgrey;
+    background-color: white;
+    width: 18.75rem;
+    max-height: 13.75rem;
+    overflow-y: scroll;
+    border-radius: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.phone-number-field__menu::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.phone-number-field__menu__item {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    white-space: nowrap;
+}
+
+.phone-number-field__menu__item__img {
+    height: 1.25rem;
+    width: 1.5625rem;
+    max-height: 1.25rem;
+    max-width: 1.5625rem;
+    box-shadow: rgba(67, 71, 85, 0.27) 0 0 0.25em, rgba(90, 125, 188, 0.05) 0 0.25em 1em;
+}
+
+.phone-number-field__menu__item__country-name {
+    margin: 0 0 0 12px;
+    color: #1f1f1f;
+}
+
+.phone-number-field__menu__item__country-code {
+    color: #6b6b6b;
+    margin: 0 auto 0 0.5rem;
+}
+
+.d-block {
+    display: block;
+}
+
+.d-none {
+    display: none;
+}
+
+.font-color-#1f1f1f {
+    color: #1f1f1f;
+}
+
+.grey-color-text {
+    color: #6b6b6b;
+}
+  
