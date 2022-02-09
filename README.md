@@ -15,6 +15,18 @@ Highly customizable phone input component with auto formatting.
 npm i phone-input-react --save
 ```
 
+## Usage
+```jsx
+import PhoneInput from 'phone-input-react'
+<PhoneInput
+  phoneNumber: string;
+  setPhoneNumber: (v: string|number) => void;
+  defaultFlag?: string;
+  startingSymbol?: string;
+  className?: string;
+/>
+```
+
 ## Contributing
 
 - Code style changes not allowed
