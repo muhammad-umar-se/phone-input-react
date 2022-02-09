@@ -7,7 +7,7 @@ import IconArrowDown from '@src/assets/IconArrowDown';
 import '../../style/index.css';
 
 const PhoneInput: FC<PhoneInputProps> = (input: PhoneInputProps) => {
-  const { phoneNumber, setPhoneNumber, defaultFlag = '', startingSymbol = '+' } = input;
+  const { phoneNumber, setPhoneNumber, defaultFlag = '', startingSymbol = '+',className } = input;
   const [flag, setFlag] = useState(defaultFlag);
 
   const [displayList, setDisplayList] = useState(false);
@@ -63,7 +63,7 @@ const PhoneInput: FC<PhoneInputProps> = (input: PhoneInputProps) => {
   };
 
   return (
-    <div className="phone-number-field__main-container">
+    <div className={`phone-number-field__main-container ${className || ''}`}>
       <div className={`phone-number-field ${isActive ? 'phone-number-field__active' : ''}`}>
         <img alt="NF" src={flag} className="phone-number-field__menu__item__img" />
         <button
@@ -102,6 +102,7 @@ const PhoneInput: FC<PhoneInputProps> = (input: PhoneInputProps) => {
       </div>
       <div className={`phone-number-field__menu ${displayList ? 'd-block' : 'd-none'}`}>
         {countryDetails.map((item: Country) => (
+            // eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/no-static-element-interactions
           <div
             key={item?.countryCode + item?.countryName}
             onClick={() => {
