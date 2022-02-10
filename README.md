@@ -11,8 +11,6 @@ Highly customizable phone input component with auto formatting.
 
 ![animation](https://i.imgur.com/phjYfx7.gifi.imgur.com/phjYfx7.gif)
 
-<blockquote class="imgur-embed-pub" lang="en" data-id="phjYfx7" data-context="false" ><a href="//imgur.com/phjYfx7"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
-
 ## Installation
 
 ```shell-script
