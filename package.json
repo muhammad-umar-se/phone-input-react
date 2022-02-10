@@ -1,10 +1,10 @@
 {
   "name": "phone-input-react",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",
   "repository": {
-    "url": "https://github.com/Sivakumar00/react-typescript-npm-boilerplate.git",
+    "url": "https://github.com/muhammad-umar-se/phone-input-react.git",
     "type": "git"
   },
   "license": "MIT",
@@ -75,6 +75,22 @@
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
+  "keywords": [
+    "react",
+    "phone",
+    "format",
+    "number",
+    "input",
+    "telephone",
+    "javascript",
+    "international",
+    "tel",
+    "localized",
+    "material",
+    "bootstrap",
+    "i18n",
+    "flags"
+  ],
   "files": [
     "dist"
   ],
